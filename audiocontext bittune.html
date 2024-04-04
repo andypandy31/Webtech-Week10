@@ -23,37 +23,37 @@
                 },
                 song = "EE -E-CE -G- --g--C-g- -e--A-B-BA -gEGaFG -E-CDB - -C--g--eA -B-BA -gEGaFG -E- CDB ";       
 
-            setInterval (play, 1000/4) ;
+                setInterval (play, 1000/4) ;
         
-            function createOscillator ( freq ) {
-                var attack = 10,
-                    decay = 250,
-                    gain = audio.createGain(),
-                    osc = audio.createOscillator();
-        
-                gain.connect (audio.destination);
-                gain.gain.setValueAtTime (0, audio.currentTime);
-                gain.gain.linearRampToValueAtTime (1, audio.currentTime + attack/1000) ;
-                gain.gain.linearRampToValueAtTime (0, audio.currentTime + decay /1000) ;
-                osc.frequency.value = freq;
-                osc.type = "square";
-                osc.connect (gain);
-                setTimeout (function(){
-                    osc.stop(0);
-                    osc.disconnect(gain);
-                    gain.disconnect(audio.destination);
-                }, decay)
-            }
-            function play () {
-                var note = song.charAt ( position ), freq = scale [note];
-                position += 1;
-                if( position >= song.length) {
-                    position = 0;
+                function createOscillator ( freq ) {
+                    var attack = 10,
+                        decay = 250,
+                        gain = audio.createGain(),
+                        osc = audio.createOscillator();
+
+                    gain.connect (audio.destination);
+                    gain.gain.setValueAtTime (0, audio.currentTime);
+                    gain.gain.linearRampToValueAtTime (1, audio.currentTime + attack/1000) ;
+                    gain.gain.linearRampToValueAtTime (0, audio.currentTime + decay /1000) ;
+                    osc.frequency.value = freq;
+                    osc.type = "square";
+                    osc.connect (gain);
+                    setTimeout (function(){
+                        osc.stop(0);
+                        osc.disconnect(gain);
+                        gain.disconnect(audio.destination);
+                    }, decay)
                 }
-                if(freq) {
-                    createOscillator(freq);
+                function play () {
+                    var note = song.charAt ( position ), freq = scale [note];
+                    position += 1;
+                    if( position >= song.length) {
+                        position = 0;
+                    }
+                    if(freq) {
+                        createOscillator(freq);
+                    }
                 }
-            }
             };
         </script>
     </body>
