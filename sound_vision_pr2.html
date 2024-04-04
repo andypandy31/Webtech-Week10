@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <audio id ="my_audio" autoplay ="autoplay" loop controls>
+        <source src ="horn.mp3" type ="audio/mpeg">
+        </audio>
+        <button onclick ="toggle_loop()" type ="button"> Toggle looping </button>
+        
+
+    </body>
+    <script>
+        var ao = document.getElementById ("my_audio");
+        
+        function toggle_loop () {
+            if (ao.loop) { ao.loop = false; }
+            else { ao.loop = true; }
+            ao.load();
+        }
+    </script>
+</html>
